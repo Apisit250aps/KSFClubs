@@ -11,35 +11,56 @@ class Annual(admin.ModelAdmin):
     list_display= [
         'annual'
     ]
-
-
-@admin.register(models.palace)
-class Character(admin.ModelAdmin):
+    
+    
+@admin.register(models.Palace)
+class Palace(admin.ModelAdmin):
     list_display = [
         'annual',
         'first_name',
         'last_name',
         'position'
     ]
+    
+    search_fields = (
+        'annual',
+        'first_name',
+        'last_name',
+        'position'
+    )
 
-@admin.register(models.event)
-class Character(admin.ModelAdmin):
+@admin.register(models.Event)
+class Event(admin.ModelAdmin):
     list_display = [
         'annual',
         'event_name',
         'event_location',
         'event_type'
     ]
+    
+    search_fields = (
+        'annual',
+        'event_name',
+        'event_location',
+        'event_type'
+    )
 
-@admin.register(models.event_image)
-class Character(admin.ModelAdmin):
+@admin.register(models.Event_image)
+class Event_image(admin.ModelAdmin):
     list_display = [
         'event',
         
     ]
 
-@admin.register(models.event_url)
-class Character(admin.ModelAdmin):
+@admin.register(models.Event_url)
+class Event_url(admin.ModelAdmin):
     list_display = [
         'event',
+        'url_name',
+        'url'
     ]
+    
+    search_fields = (
+        'event',
+        'url_name'
+    )

@@ -6,9 +6,9 @@ class Annual(models.Model):
     annual = models.CharField(max_length=4)
     
     def __str__(self):
-        return f"ปีการศึกษา{self.annual}"
+        return f"ปีการศึกษา {self.annual}"
 
-class palace(models.Model):
+class Palace(models.Model):
     
     annual = models.ForeignKey(Annual, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='palaces', blank=True)
@@ -18,18 +18,19 @@ class palace(models.Model):
     position = models.CharField(max_length=64)
     
     def __str__(self):
+        
         return f"{self.first_name} {self.last_name}"
+        
     
+class Event(models.Model):
     
-class event(models.Model):
-    EVENT_TYPE = [
+    EVENT_TYPE = (
         ('กิจกรรม','กิจกรรม'),
         ('ค่าย','ค่าย'),
-    ]
+    )
 
-    event_img = models.ImageField(upload_to='events', blank=True)
-    
     annual = models.ForeignKey(Annual, on_delete=models.CASCADE)
+    event_img = models.ImageField(upload_to='events', blank=True)
     event_name = models.CharField(max_length=255)
     event_detail = models.TextField(default="-")
     event_type = models.CharField(max_length=64, choices=EVENT_TYPE)
@@ -44,16 +45,17 @@ class event(models.Model):
         return f"{self.event_name} / {self.annual.annual}"
     
     
-class event_image(models.Model):
-    event = models.ForeignKey(event, on_delete=models.CASCADE)
+class Event_image(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='events')
     
     def __str__(self):
         
         return f"{self.event} {self.event.annual.annual}"
     
-class event_url(models.Model):
-    event = models.ForeignKey(event, on_delete=models.CASCADE)
+class Event_url(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    url_name = models.CharField(max_length=64)
     url = models.CharField(max_length=256)
     
     def __str__(self):
